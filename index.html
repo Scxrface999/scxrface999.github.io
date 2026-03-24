@@ -14,6 +14,7 @@
             --border: rgba(255, 255, 255, 0.1);
         }
 
+        /* --- GLOBAL RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
@@ -22,9 +23,10 @@
             color: var(--accent);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Subtle Grain Overlay */
+        /* --- GRAIN OVERLAY --- */
         body::before {
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -32,6 +34,7 @@
             opacity: 0.04; pointer-events: none; z-index: 9999;
         }
 
+        /* --- REVEAL ANIMATION --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.23, 1, 0.32, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -52,10 +55,11 @@
         }
         .nav-links a:hover { opacity: 1; }
 
-        /* --- HERO --- */
+        /* --- HERO SECTION --- */
         .hero {
             height: 90vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
+            padding: 0 20px;
         }
 
         .hero h1 {
@@ -72,10 +76,11 @@
             padding: 15px 35px; border: 1px solid var(--accent); text-decoration: none;
             font-weight: 600; font-size: 0.75rem; text-transform: uppercase;
             letter-spacing: 2px; transition: 0.5s; color: white;
+            background: transparent;
         }
         .btn:hover { background: white; color: black; transform: translateY(-5px); }
 
-        /* --- SKILLS HOVER SECTION --- */
+        /* --- SKILLS GRID (HOVER ZOOM) --- */
         .skills-section { padding: 120px 5%; }
         .section-tag { font-size: 0.7rem; letter-spacing: 5px; color: var(--text-dim); text-transform: uppercase; text-align: center; margin-bottom: 60px; }
         
@@ -104,19 +109,29 @@
         .skill-card:hover img { transform: scale(1.1); filter: grayscale(0%) brightness(0.8); }
         .skill-card:hover .skill-info { transform: translateY(-10px); }
 
-        /* --- ABOUT ME --- */
-        .about-section { padding: 150px 10%; display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px; }
+        /* --- ABOUT ME SECTION --- */
+        .about-section { padding: 150px 10%; display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px; align-items: start; }
         .about-title { font-family: 'Space Grotesk', sans-serif; font-size: 4rem; line-height: 0.9; }
         .about-content p { font-size: 1.2rem; font-weight: 300; line-height: 1.7; color: var(--text-dim); margin-bottom: 30px; }
         .about-content strong { color: white; font-weight: 500; }
 
+        /* --- CONTACT SECTION --- */
+        .contact-container { padding: 120px 10%; background: #050505; border-top: 1px solid var(--border); }
+        .contact-form input, .contact-form textarea {
+            width: 100%; background: transparent; border: none;
+            border-bottom: 1px solid var(--border); color: white; padding: 20px 0;
+            font-size: 1.1rem; outline: none; margin-bottom: 30px; font-family: inherit;
+        }
+        .contact-form input:focus, .contact-form textarea:focus { border-bottom-color: white; }
+
         /* --- FOOTER --- */
-        footer { padding: 120px 5% 50px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; }
+        footer { padding: 100px 5% 50px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; }
         .footer-left h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-top: 10px; }
         .social-links { display: flex; flex-direction: column; gap: 12px; text-align: right; }
         .social-links a { color: white; text-decoration: none; font-size: 1rem; opacity: 0.4; transition: 0.3s; }
         .social-links a:hover { opacity: 1; transform: translateX(-8px); }
 
+        /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
             .about-section { grid-template-columns: 1fr; gap: 40px; }
             footer { flex-direction: column; align-items: flex-start; gap: 50px; }
@@ -135,13 +150,13 @@
         </div>
     </nav>
 
-    <section class="hero">
+    <header class="hero">
         <div class="reveal">
             <p>1st Year BCA Student // Developer</p>
             <h1>ARYAN DIN</h1>
             <a href="https://github.com/Scxrface999" target="_blank" class="btn">View Github ↗</a>
         </div>
-    </section>
+    </header>
 
     <section id="skills" class="skills-section">
         <p class="section-tag reveal">Technical Arsenal</p>
@@ -154,7 +169,7 @@
                 </div>
             </div>
             <div class="skill-card reveal">
-                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000" alt="Data Structures">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000" alt="DS">
                 <div class="skill-info">
                     <h3 style="font-family: 'Space Grotesk'; font-size: 2rem;">DS & ALGO</h3>
                     <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 5px; letter-spacing: 2px;">PROBLEM SOLVING</p>
@@ -193,14 +208,14 @@
         </div>
     </section>
 
-    <section id="contact" style="padding: 120px 10%; background: #050505; border-top: 1px solid var(--border);">
+    <section id="contact" class="contact-container">
         <div class="reveal">
             <h2 style="font-family: 'Space Grotesk'; font-size: 3rem; margin-bottom: 40px;">Get in Touch</h2>
-            <form id="contactForm" style="display: grid; gap: 30px; max-width: 600px;">
-                <input type="text" id="name" placeholder="NAME" required style="background: transparent; border: none; border-bottom: 1px solid var(--border); color: white; padding: 20px 0; font-size: 1.1rem; outline: none;">
-                <input type="email" id="email" placeholder="EMAIL" required style="background: transparent; border: none; border-bottom: 1px solid var(--border); color: white; padding: 20px 0; font-size: 1.1rem; outline: none;">
-                <textarea id="message" rows="3" placeholder="MESSAGE" required style="background: transparent; border: none; border-bottom: 1px solid var(--border); color: white; padding: 20px 0; font-size: 1.1rem; outline: none;"></textarea>
-                <button type="submit" class="btn" style="width: fit-content; background: none; cursor: pointer;">Send Message ↗</button>
+            <form id="contactForm" class="contact-form" style="max-width: 600px;">
+                <input type="text" id="name" placeholder="NAME" required>
+                <input type="email" id="email" placeholder="EMAIL" required>
+                <textarea id="message" rows="3" placeholder="MESSAGE" required></textarea>
+                <button type="submit" class="btn" style="cursor: pointer;">Send Message ↗</button>
             </form>
             <p id="status" style="margin-top: 25px; font-size: 0.8rem; letter-spacing: 2px;"></p>
         </div>
@@ -219,17 +234,23 @@
     </footer>
 
     <script>
-        // Smooth Reveal Logic
+        /* --- FIX: FORCE TOP SCROLL ON REFRESH --- */
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
+        /* --- REVEAL ON SCROLL --- */
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Form Logic connected to Render
+        /* --- CONTACT FORM LOGIC --- */
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const status = document.getElementById('status');
-            status.innerText = "TRANSMITTING...";
+            status.innerText = "TRANSMITTING DATA...";
             try {
                 const res = await fetch('https://my-portfolio-bwgk.onrender.com/contact', {
                     method: 'POST',
